@@ -62,11 +62,10 @@ pub fn count_packed(v: u64) -> usize {
 pub fn unpack(li: impl Iterator<Item = u64>) -> Vec<u64> {
   let mut r = Vec::new();
   for v in li {
-    let count = count_packed(v);
     let bits = SIMPLE8B_BITS[(v >> 60) as usize];
     let mask = u64::max_value() >> (64 - bits);
     let mut v = v;
-    for _i in 0..count {
+    for _ in 0..count_packed(v) {
       r.push(v & mask);
       v >>= bits;
     }

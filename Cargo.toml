@@ -12,7 +12,3 @@ repository = "https://github.com/user-tax-dev/simple8"
 
 [dev-dependencies]
 criterion = "0.4"
-
-[[bench]]
-name = "transcode"
-harness = false

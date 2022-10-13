@@ -11,7 +11,7 @@ repository = "https://github.com/user-tax-dev/simple8"
 [dependencies]
 
 [dev-dependencies]
-criterion = "0.2"
+criterion = "0.4"
 
 [[bench]]
 name = "transcode"

@@ -66,7 +66,7 @@ pub fn unpack(li: impl Iterator<Item = u64>) -> Vec<u64> {
     let bits = SIMPLE8B_BITS[(v >> 60) as usize];
     let mask = u64::max_value() >> (64 - bits);
     let mut v = v;
-    for i in 0..count {
+    for _i in 0..count {
       r.push(v & mask);
       v >>= bits;
     }

@@ -1,5 +1,5 @@
 [package]
-name = "simple8b"
+name = "simple8"
 version = "0.1.0"
 authors = ["Martin Pittermann <martinp2250@gmail.com>", "i@user.tax"]
 edition = "2021"

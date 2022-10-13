@@ -10,12 +10,12 @@ fn encode_array(values: &[u64], result: &mut [u64]) {
   let mut count = 0;
   let mut i = 0;
   while count < values.len() {
-    count += simple8b::pack(&values[count..], &mut result[i]).unwrap();
+    count += simple8::pack(&values[count..], &mut result[i]).unwrap();
     i += 1;
   }
 }
 
-fn benches_simple8b_encode(c: &mut Criterion) {
+fn benches_simple8_encode(c: &mut Criterion) {
   c.bench_function("encode_zeros", |b| {
     let values = [0u64; 1024];
     let mut result = [0u64; 128];
@@ -34,7 +34,7 @@ fn benches_simple8b_encode(c: &mut Criterion) {
 fn decode_array(input: &[u64], output: &mut [u64]) -> usize {
   let mut count = 0;
   for &v in input {
-    count += simple8b::unpack(v, &mut output[count..]);
+    count += simple8::unpack(v, &mut output[count..]);
     if count == output.len() {
       break;
     }
@@ -42,7 +42,7 @@ fn decode_array(input: &[u64], output: &mut [u64]) -> usize {
   count
 }
 
-fn benches_simple8b_decode(c: &mut Criterion) {
+fn benches_simple8_decode(c: &mut Criterion) {
   c.bench_function("decode_zeros", |b| {
     let values = [0u64; 1024];
     let mut encoded = [0u64; 128];
@@ -73,5 +73,5 @@ fn benches_simple8b_decode(c: &mut Criterion) {
   });
 }
 
-criterion_group!(benches, benches_simple8b_encode, benches_simple8b_decode);
+criterion_group!(benches, benches_simple8_encode, benches_simple8_decode);
 criterion_main!(benches);

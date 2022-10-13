@@ -1,12 +1,12 @@
 [package]
 name = "simple8b"
 version = "0.1.0"
-authors = ["Martin Pittermann <martinp2250@gmail.com>"]
-edition = "2018"
+authors = ["Martin Pittermann <martinp2250@gmail.com>", "i@user.tax"]
+edition = "2021"
 license = "MIT"
 description = "Pack multiple u64 values into a single u64"
-homepage = "https://github.com/martin2250/rs-simple8b"
-repository = "https://github.com/martin2250/rs-simple8b"
+homepage = "https://github.com/user-tax-dev/simple8"
+repository = "https://github.com/user-tax-dev/simple8"
 
 [dependencies]
 

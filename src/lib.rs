@@ -67,7 +67,7 @@ pub fn unpack(li: impl Iterator<Item = u64>) -> Vec<u64> {
     let mask = u64::max_value() >> (64 - bits);
     let mut v = v;
     for i in 0..count {
-      r[i] = v & mask;
+      r.push(v & mask);
       v >>= bits;
     }
   }
@@ -81,8 +81,7 @@ mod test {
   fn test_too_large() {
     let values = [2, 76, 3, (u64::max_value() >> 4) + 1, 7, 2];
     let mut r = 0;
-    let res = pack(vec![values]);
-    dbg!(&res);
+    let res = pack(&values, &mut r);
     match res {
       Ok(_) => panic!("no error"),
       Err(_) => (),

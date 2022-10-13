@@ -59,16 +59,19 @@ pub fn count_packed(v: u64) -> usize {
 }
 
 /// Decode values from a packed u64 into output
-pub fn unpack(v: u64, output: &mut [u64]) -> usize {
-  let count = usize::min(count_packed(v), output.len());
-  let bits = SIMPLE8B_BITS[(v >> 60) as usize];
-  let mask = u64::max_value() >> (64 - bits);
-  let mut v = v;
-  for i in 0..count {
-    output[i] = v & mask;
-    v >>= bits;
+pub fn unpack(li: impl Iterator<Item = u64>) -> Vec<u64> {
+  let mut r = Vec::new();
+  for v in li {
+    let count = count_packed(v);
+    let bits = SIMPLE8B_BITS[(v >> 60) as usize];
+    let mask = u64::max_value() >> (64 - bits);
+    let mut v = v;
+    for i in 0..count {
+      r[i] = v & mask;
+      v >>= bits;
+    }
   }
-  count
+  r
 }
 
 #[cfg(test)]
@@ -78,7 +81,8 @@ mod test {
   fn test_too_large() {
     let values = [2, 76, 3, (u64::max_value() >> 4) + 1, 7, 2];
     let mut r = 0;
-    let res = pack(&values, &mut r);
+    let res = pack(vec![values]);
+    dbg!(&res);
     match res {
       Ok(_) => panic!("no error"),
       Err(_) => (),
